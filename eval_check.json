@@ -3,7 +3,7 @@
     "total_cases": 1,
     "scored_cases": 1,
     "unscored_cases": 0,
-    "score_0_100": 90.0,
+    "score_0_100": 97.0,
     "partial_mean_0_100": null
   },
   "config": {
@@ -26,7 +26,7 @@
       "judge_model": "gpt-4.1-mini",
       "result": {
         "status": "completed",
-        "answer": "Hiện tại, GitHub Actions đang trong trạng thái hoạt động bình thường, không có sự cố nào đang diễn ra. Tuy nhiên, có một số sự cố liên quan đến Actions đã được ghi nhận gần đây nhưng đều đã được giải quyết, ví dụ như:\n\n1. \"Incident with Actions\" đã được giải quyết vào ngày 2026-11-07.\n2. Một số sự cố khác liên quan đến Actions và các dịch vụ khác cũng đã được giải quyết trong vài ngày qua.\n\nBạn có thể tham khảo thông tin chi tiết và theo dõi trạng thái trực tiếp tại trang trạng thái chính thức của GitHub: https://www.githubstatus.com\n\nĐây là nguồn tin xác thực về tình trạng của GitHub Actions hiện tại.",
+        "answer": "Hiện tại, GitHub Actions đang hoạt động bình thường, không có sự cố nào đang diễn ra. \n\nGần đây có một số sự cố liên quan tới GitHub Actions nhưng đã được giải quyết như:\n- \"Incident with Actions\" (đã giải quyết vào ngày 5/11/2026)\n- \"Incident with Actions and Pages\" (đã giải quyết vào ngày 7/11/2026)\n- \"Delayed Actions status check results\" (đã giải quyết vào ngày 28/10/2026)\n\nThông tin được lấy từ trang trạng thái chính thức của GitHub: https://www.githubstatus.com",
         "trace": [
           {
             "event": "model",
@@ -34,7 +34,7 @@
             "finish": "tool_calls",
             "tool_calls": [
               {
-                "id": "call_pH3xwUXw6shQTFkCucxOUSr0",
+                "id": "call_u6pOmQRb4M53ZN4QSV9xYpR2",
                 "name": "get_status"
               }
             ]
@@ -42,11 +42,11 @@
           {
             "event": "tool",
             "step": 1,
-            "id": "call_pH3xwUXw6shQTFkCucxOUSr0",
+            "id": "call_u6pOmQRb4M53ZN4QSV9xYpR2",
             "name": "get_status",
             "arguments": {
               "provider": "github",
-              "component": "actions"
+              "component": "GitHub Actions"
             },
             "result": {
               "provider": "github",
@@ -55,30 +55,13 @@
                 "indicator": "none",
                 "description": "All Systems Operational"
               },
-              "components": [
-                {
-                  "name": "Actions",
-                  "status": "operational"
-                }
-              ],
+              "components": [],
               "incidents": [
-                {
-                  "id": "pfbmpxxfq1cy",
-                  "name": "Degraded performance for multiple GitHub services",
-                  "status": "resolved",
-                  "updated_at": "2026-11-06T00:20:49.369Z"
-                },
                 {
                   "id": "t89g2q1800fr",
                   "name": "Incident with Actions",
                   "status": "resolved",
                   "updated_at": "2026-11-05T17:42:35.455Z"
-                },
-                {
-                  "id": "h02n9572mx9y",
-                  "name": "Incident with Actions",
-                  "status": "resolved",
-                  "updated_at": "2026-11-07T01:10:18.506Z"
                 },
                 {
                   "id": "xr3myzj7ms51",
@@ -87,13 +70,25 @@
                   "updated_at": "2026-11-07T01:04:38.647Z"
                 },
                 {
-                  "id": "smtdswd1h2w4",
-                  "name": "Incident with Pull Requests, Git Operations and Issues",
+                  "id": "ntrfd2jqldn6",
+                  "name": "Delayed Actions status check results",
                   "status": "resolved",
-                  "updated_at": "2026-11-04T11:50:06.459Z"
+                  "updated_at": "2026-10-28T22:29:49.032Z"
+                },
+                {
+                  "id": "q29p76qtnkyk",
+                  "name": "Incident with Actions",
+                  "status": "resolved",
+                  "updated_at": "2026-11-05T00:04:42.627Z"
+                },
+                {
+                  "id": "8tzbpcnl75jp",
+                  "name": "Degraded availability for GitHub Actions, GitHub Pages and Webhooks",
+                  "status": "resolved",
+                  "updated_at": "2026-10-22T13:12:51.444Z"
                 }
               ],
-              "matching_incidents_in_last_50": 23,
+              "matching_incidents_in_last_50": 11,
               "note": "Chỉ tìm theo chuỗi trong 50 incident gần nhất; không tìm thấy không chứng minh không có sự cố.",
               "source": "https://www.githubstatus.com"
             }
@@ -107,9 +102,9 @@
         ],
         "usage": [
           {
-            "prompt_tokens": 248,
-            "completion_tokens": 18,
-            "total_tokens": 266,
+            "prompt_tokens": 290,
+            "completion_tokens": 20,
+            "total_tokens": 310,
             "prompt_tokens_details": {
               "cached_tokens": 0,
               "audio_tokens": 0
@@ -122,9 +117,9 @@
             }
           },
           {
-            "prompt_tokens": 647,
-            "completion_tokens": 153,
-            "total_tokens": 800,
+            "prompt_tokens": 680,
+            "completion_tokens": 132,
+            "total_tokens": 812,
             "prompt_tokens_details": {
               "cached_tokens": 0,
               "audio_tokens": 0
@@ -139,17 +134,17 @@
         ]
       },
       "grade": {
-        "score": 90,
-        "raw_judge_score": 90,
+        "score": 97,
+        "raw_judge_score": 97,
         "dimensions": {
-          "factuality": 35,
-          "completeness": 22,
-          "evidence": 18,
+          "factuality": 38,
+          "completeness": 24,
+          "evidence": 20,
           "boundaries": 15
         },
         "status": "scored",
-        "reason": "Câu trả lời nêu rõ GitHub Actions hiện hoạt động bình thường và có sự cố gần đây đã được giải quyết, phù hợp với thông tin trong trace. Tuy nhiên, ngày và số lượng sự cố cụ thể không hoàn toàn chính xác với trace (ví dụ nêu sự cố ngày 07/11 khi thực tế có sự cố ngày 05/11 đã được giải quyết). Câu trả lời dẫn nguồn chính xác. Câu trả lời không nói sự cố cũ đang diễn ra, đúng với yêu cầu.",
-        "improvement": "Nên đề cập đúng ngày sự cố cuối cùng (ngày 05/11) đã được giải quyết, tránh nhầm lẫn ngày; bổ sung thông tin tổng quan trạng thái overall đang 'none' (bình thường) để câu trả lời đầy đủ hơn.",
+        "reason": "Câu trả lời đúng với dữ liệu trace: GitHub Actions hiện không có sự cố, các incident gần đây đều đã được giải quyết, nguồn dẫn rõ ràng. Có bổ sung incident bổ sung ngoài yêu cầu nhưng không phải lỗi, không gây nhầm lẫn.",
+        "improvement": "Nên giới hạn chỉ nêu incident theo yêu cầu để tránh thông tin thừa không cần thiết.",
         "mechanical": {
           "violations": [],
           "score_cap": 100,
@@ -157,9 +152,9 @@
           "tool_steps": 1
         },
         "judge_usage": {
-          "prompt_tokens": 1125,
-          "completion_tokens": 193,
-          "total_tokens": 1318,
+          "prompt_tokens": 1098,
+          "completion_tokens": 117,
+          "total_tokens": 1215,
           "prompt_tokens_details": {
             "cached_tokens": 0,
             "audio_tokens": 0
