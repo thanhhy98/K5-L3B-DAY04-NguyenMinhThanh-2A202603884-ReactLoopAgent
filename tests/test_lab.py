@@ -80,6 +80,44 @@ class LoopTests(unittest.TestCase):
 
 
 class ProviderTests(unittest.TestCase):
+    @patch.dict('os.environ', {
+        'API_KEY': 'opencode-test-key',
+        'API_ENDPOINT': 'https://opencode.ai/inference/go/openai/v1',
+    })
+    @patch('providers.post_json')
+    def test_openai_compatible_provider_uses_opencode_settings(self, post):
+        post.return_value = {
+            'choices': [{'message': {'role': 'assistant', 'content': 'ok'}, 'finish_reason': 'stop'}],
+            'usage': {},
+        }
+        client = Provider('openai', 'deepseek-v4.1-flash')
+        client.complete([{'role': 'user', 'content': 'hello'}], [])
+        self.assertEqual(
+            post.call_args.args[0],
+            'https://opencode.ai/inference/go/openai/v1/chat/completions',
+        )
+        self.assertEqual(
+            post.call_args.args[1]['Authorization'],
+            'Bearer opencode-test-key',
+        )
+        self.assertEqual(post.call_args.args[2]['model'], 'deepseek-v4.1-flash')
+
+    @patch.dict('os.environ', {'OPENCODE_API_KEY': 'opencode-test-key', 'OPENCODE_SESSION': 'ses_test'}, clear=True)
+    @patch('providers.post_json')
+    def test_opencode_provider_uses_console_endpoint(self, post):
+        post.return_value = {
+            'choices': [{'message': {'role': 'assistant', 'content': 'ok'}, 'finish_reason': 'stop'}],
+            'usage': {},
+        }
+        client = Provider('opencode', 'deepseek-v4.1-flash')
+        client.complete([{'role': 'user', 'content': 'hello'}], [])
+        self.assertEqual(
+            post.call_args.args[0],
+            'https://opencode.ai/inference/openai/v1/chat/completions',
+        )
+        self.assertEqual(post.call_args.args[1]['Authorization'], 'Bearer opencode-test-key')
+        self.assertEqual(post.call_args.args[1]['x-opencode-session'], 'ses_test')
+
     @patch.dict('os.environ', {'ANTHROPIC_API_KEY': 'test'})
     @patch('providers.post_json')
     def test_anthropic_groups_results(self, post):

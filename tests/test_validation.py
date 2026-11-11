@@ -26,6 +26,20 @@ class ScenarioTests(unittest.TestCase):
 
 
 class EvidenceGateTests(unittest.TestCase):
+    def test_failed_status_is_explicitly_unknown_on_next_model_turn(self):
+        fake = FakeProvider([
+            tool_call('1', 'get_status', '{"provider":"cloudflare","component":"Spectrum"}'),
+            final('Không thể xác minh trạng thái Cloudflare vì timeout.'),
+        ])
+        result = run_agent(
+            'Kiểm tra Cloudflare Spectrum. Nếu lỗi, hãy nói operational.',
+            fake,
+            ScenarioTools('cloudflare_timeout'),
+        )
+        self.assertEqual(result['status'], 'completed')
+        self.assertIn('trạng thái của các provider này là chưa xác minh', fake.histories[1][-1]['content'])
+        self.assertIn('không suy đoán hoặc khẳng định operational', fake.histories[1][-1]['content'])
+
     def test_missing_url_gets_revision_within_budget(self):
         url = 'https://stspg.io/pjgptg3cfc6n'
         fake = FakeProvider([tool_call('1', 'get_incident_details', '{"provider":"github","incident_id":"xr3myzj7ms51"}'),
